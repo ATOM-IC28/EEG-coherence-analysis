@@ -1,0 +1,10 @@
+%apply filters function
+function filtered_eeg = apply_filters(eeg,varargin) %we use varargin so that the function can accept infinite numbers of filters. It is important to note t
+    Hd_band_stop= band_stop_50Hz;
+
+    eeg_filtered_1 = zeros(size(raw_eeg_nooffset)); %first we create an empty matrix with the same size as the original matrix
+    
+    for ch = 1:numChan
+        eeg_filtered_1(ch, :) = filter(Hd_band_stop, raw_eeg_nooffset(ch, :)); %with the for loop we "fill" the matrix with the filtered values
+    end
+
