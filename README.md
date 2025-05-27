@@ -1,43 +1,42 @@
-# Análise de Conectividade Funcional em EEG com Coerência (MATLAB)
+# Functional Connectivity Analysis in EEG using Coherence (MATLAB)
 
-Este projeto analisa a conectividade funcional em sinais EEG recolhidos em três estados distintos: tarefa de cálculo ativa com olhos fechados, repouso com olhos fechados e repouso com olhos abertos.
+This project analyzes functional connectivity in EEG signals collected under three distinct states: active mental calculation with eyes closed, resting with eyes closed, and resting with eyes open.
 
-## Objetivo
+## Objective
 
-Avaliar as diferenças de conectividade entre canais EEG através da coerência, com foco em bandas específicas (theta, alpha, beta), e representá-las com matrizes de coerência de forma a poder identificar padrões indicativos dos três estados diferentes.
+To evaluate differences in EEG channel connectivity through coherence analysis, with a focus on specific frequency bands (theta, alpha, beta), and to represent the results using coherence matrices to identify patterns indicative of the three functional states.
 
-## Metodologia
+## Methodology
 
-- Pré-processamento com remoção de offset e filtros (notch, passa-alto e passa-baixo)
-- Filtragem por banda (theta: 4–8 Hz, alpha: 8–13 Hz, etc.)
-- Cálculo da coerência entre todos os pares de canais com `mscohere`
-- Geração de heatmaps para visualizar padrões espaciais de conectividade
+- Preprocessing with offset removal and filtering (notch, high-pass, low-pass)
+- Band-pass filtering (theta: 4–8 Hz, alpha: 8–13 Hz, etc.)
+- Coherence calculation between all pairs of EEG channels using `mscohere`
+- Generation of heatmaps and topoplots to visualize spatial connectivity patterns
 
-## Tecnologias usadas
+## Technologies Used
 
 - MATLAB
-- EEGLAB (para `topoplot` e leitura de locais dos eletrodos)
-- Sinais EEG reais (.bdf)
+- EEGLAB (for `topoplot` and electrode location loading)
+- Real EEG signals (.bdf format)
 
-## Conteúdo
+## Contents
 
-- `main.m`: script principal que executa toda a pipeline
-- `apply_filters.m`: função para aplicar múltiplos filtros a um sinal
-- `calculate_coherence.m`: função que calcula a matriz de coerência entre canais
-- `projeto_final_v3.pdf`: relatório final do projeto
+- `main.m`: main script that executes the entire processing pipeline
+- `apply_filters.m`: function to apply multiple filters to EEG signals
+- `calculate_coherence.m`: function that computes the coherence matrix between channels
+- `projeto_final_v3.pdf`: final project report (written in Portuguese)
 
-## Exemplos de resultados
+## Sample Results
 
-Inclui:
-- Matrizes de coerência por condição
-- Mapas topográficos das médias por canal
-- Diferença de coerência entre estados (ex: ativo vs. repouso)
+Includes:
+- Coherence matrices for each condition
+- Topographic maps of average coherence per channel
+- Coherence differences between conditions (e.g., active vs. resting)
 
-## Autor
+## Author
 
-João Mota — Estudante de Engenharia Biomédica na NOVA FCT
+João Mota — Biomedical Engineering student at NOVA FCT (Lisbon, Portugal)
 
-## Repositório
+## Context
 
-Este projeto foi desenvolvido no contexto da unidade curricular de **Eletrofisiologia**.
-
+This project was developed as part of the **Electrophysiology** course at NOVA School of Science and Technology (FCT).
