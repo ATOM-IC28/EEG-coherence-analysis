@@ -34,6 +34,10 @@ channels = containers.Map(channel_labels, indexes);
 %Use channels_label("number of channel") to access the channel label
 
 %%
+%Initialize eeglab
+eeglab;
+
+%%
 %Visualize the electrodes
 figure;
 chanlocs = pop_readlocs('channel_locs.ced');
@@ -493,4 +497,118 @@ for i = 1:top_n
     plot(row_idx_3(i), col_idx_3(i), "ro", "Markersize", 12, "LineWidth", 1.5);
 end
 hold off;
+
+%%
+%Ploting the mean coherence between a fixed channel and all the other
+%channels in the three states in a specific frequency band
+
+coh_mean_1 = alpha_coh_mean_1;
+coh_mean_2 = alpha_coh_mean_2;
+coh_mean_3 = alpha_coh_mean_3;
+
+band = "Alpha band";
+
+fixed_chan = channels('Oz');
+chanlocs = pop_readlocs('channel_locs.ced');
+
+coh_vec_1 = coh_mean_1(fixed_chan,:);
+coh_vec_2 = coh_mean_2(fixed_chan,:);
+coh_vec_3 = coh_mean_3(fixed_chan,:);
+
+
+all_vals = [coh_vec_1(:); coh_vec_2(:); coh_vec_3(:)]; %Preparing the values as a 1D vector so we can use the min and max functions
+clim = [min(all_vals, [], "omitnan"), max(all_vals, [], "omitnan")];
+
+figure;
+%Active, Eyes Closed
+subplot(3,1,1)
+topoplot(coh_vec_1, chanlocs, 'style', 'map', 'electrodes', 'on', 'maplimits',clim);
+title(strcat("Active, Eyes Closed - ", band, " - Coeherences relative to channel ", channel_labels{fixed_chan}))
+colorbar;
+
+%Resting, Eyes Closed
+subplot(3,1,2)
+topoplot(coh_vec_2, chanlocs, 'style', 'map', 'electrodes', 'on','maplimits',clim);
+title(strcat("Resting, Eyes Closed - ", band, " - Coeherences relative to channel ", channel_labels{fixed_chan}))
+colorbar;
+
+%Resting, Eyes Open
+subplot(3,1,3)
+topoplot(coh_vec_3, chanlocs, 'style', 'map', 'electrodes', 'on', 'maplimits',clim);
+title(strcat("Resting, Eyes Open - ", band, " - Coeherences relative to channel ", channel_labels{fixed_chan}))
+colorbar;
+
+%%
+%Ploting the mean coherence between a fixed channel and all the other
+%channels for all 32 channels in one specific state and frequency band
+
+coh_mean_1 = theta_coh_mean_1;
+coh_mean_2 = theta_coh_mean_2;
+coh_mean_3 = theta_coh_mean_3;
+
+band = "Theta band";
+
+fixed_chan = channels('Fp1');
+chanlocs = pop_readlocs('channel_locs.ced');
+
+coh_vec_1 = coh_mean_1(fixed_chan,:);
+coh_vec_2 = coh_mean_2(fixed_chan,:);
+coh_vec_3 = coh_mean_3(fixed_chan,:);
+
+
+all_vals = [coh_vec_1(:); coh_vec_2(:); coh_vec_3(:)]; %Preparing the values as a 1D vector so we can use the min and max functions
+clim = [min(all_vals, [], "omitnan"), max(all_vals, [], "omitnan")];
+
+%Active, Eyes Closed
+
+figure('Name', strcat('Active, Eyes Closed - ', band), 'NumberTitle', 'off');
+
+for ch= 1:numChan
+    subplot(8,4,ch)
+    coh_vec_1 = coh_mean_1(ch,:);
+    coh_vec_1(ch) = 0;
+    topoplot(coh_vec_1, chanlocs, ...
+    'style', 'map', ...
+    'electrodes', 'on', ...
+    'maplimits',clim, ...
+    'emarker2', {ch, 'o', 'w', 3, 1}); 
+    title(strcat("Fixed Channel ", channel_labels{ch}))
+    colorbar;
+end
+
+%Resting, Eyes Closed
+
+figure('Name', strcat('Resting, Eyes Closed - ', band), 'NumberTitle', 'off');
+
+for ch= 1:numChan
+    subplot(8,4,ch)
+    coh_vec_2 = coh_mean_2(ch,:);
+    coh_vec_2(ch) = 0;
+    topoplot(coh_vec_2, chanlocs, ...
+    'style', 'map', ...
+    'electrodes', 'on', ...
+    'maplimits',clim, ...
+    'emarker2', {ch, 'o', 'w', 3, 1});  
+    title(strcat("Fixed Channel ", channel_labels{ch}))
+    colorbar;
+
+end
+
+%Resting, Eyes Open
+
+figure('Name', strcat('Resting, Eyes Open - ', band), 'NumberTitle', 'off');
+
+for ch= 1:numChan
+    subplot(8,4,ch)
+    coh_vec_3 = coh_mean_3(ch,:);
+    coh_vec_3(ch) = 0;
+    topoplot(coh_vec_3, chanlocs, ...
+    'style', 'map', ...
+    'electrodes', 'on', ...
+    'maplimits',clim, ...
+    'emarker2', {ch, 'o', 'w', 3, 1});  
+    title(strcat("Fixed Channel ", channel_labels{ch}))
+    colorbar;
+
+end
 
