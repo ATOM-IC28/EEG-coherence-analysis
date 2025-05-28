@@ -11,7 +11,7 @@ To evaluate differences in EEG channel connectivity through coherence analysis, 
 - Preprocessing with offset removal and filtering (notch, high-pass, low-pass)
 - Band-pass filtering (theta: 4–8 Hz, alpha: 8–13 Hz, etc.)
 - Coherence calculation between all pairs of EEG channels using `mscohere`
-- Generation of heatmaps and topoplots to visualize spatial connectivity patterns
+- Generation of heatmaps to visualize spatial connectivity patterns
 
 ## Technologies Used
 

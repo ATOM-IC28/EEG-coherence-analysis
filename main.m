@@ -35,6 +35,8 @@ channels = containers.Map(channel_labels, indexes);
 
 %%
 %Initialize eeglab
+%You can close the pop-up window after initializing eeglab
+addpath(genpath('./eeglab2025.0.0'));
 eeglab;
 
 %%
